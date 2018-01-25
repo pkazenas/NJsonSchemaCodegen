@@ -21,7 +21,7 @@ namespace JsonSchemaCodegen
         [Option('n', "namespace", Required = true, HelpText = "output directory")]
         public string Namespace { get; set; }
 
-        [Option("overwrite", HelpText = "If set then default root class name will be changed to json schema file name")]
-        public bool Overwrite { get; set; } = true;
+        [Option("keepDefaultName", HelpText = "If set then default root class name will not be changed")]
+        public bool KeepDefaultName { get; set; } = false;
     }
 }

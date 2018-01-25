@@ -20,7 +20,7 @@ namespace JsonSchemaCodegen
                     filePaths,
                     options.OutputDir,
                     options.Namespace, 
-                    options.Overwrite);
+                    !options.KeepDefaultName);
             }
             else if (options.Directory != null)
             {
@@ -30,7 +30,7 @@ namespace JsonSchemaCodegen
                         Directory.GetFiles(options.Directory).ToList<string>(),
                         options.OutputDir,
                         options.Namespace,
-                        options.Overwrite);
+                        !options.KeepDefaultName);
                 }
                 catch (Exception e)
                 {
