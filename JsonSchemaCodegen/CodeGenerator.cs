@@ -13,6 +13,12 @@ namespace JsonSchemaCodegen
     {
         public static void GenerateJsonSchema(List<string> filePaths, string outputPath, string nmespace, bool overwriteRootObjectName)
         {
+            if(!Directory.Exists(outputPath))
+            {
+                Console.WriteLine($"Creating output directory: {outputPath}");
+                Directory.CreateDirectory(outputPath);
+            }
+
             filePaths.ForEach(path =>
             {
                 Console.WriteLine($"Generating c# classes from path: ${path}");
@@ -36,7 +42,8 @@ namespace JsonSchemaCodegen
                     var file = generator.GenerateFile();
                     if(overwriteRootObjectName)
                     {
-                        file = file.Replace("Jschema", fileName);
+                        file = file.Replace("public partial class Json ", $"public partial class {fileName}");
+                        file = file.Replace("public static Json FromJson(string data)", $"public static {fileName} FromJson(string data)");
                     }
 
                     var outputFilePath = Path.Combine(outputPath, $"{fileName}.cs");
